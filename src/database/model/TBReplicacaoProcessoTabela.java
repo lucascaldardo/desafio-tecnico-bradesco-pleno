@@ -1,0 +1,71 @@
+package database.model;
+
+public class TBReplicacaoProcessoTabela {
+
+    private Long id;
+    private Long processoId;
+    private String tabelaOrigem;
+    private String tabelaDestino;
+    private int ordem;
+    private boolean habilitado;
+    private String dsWhere;
+
+    public TBReplicacaoProcessoTabela() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getProcessoId() {
+        return processoId;
+    }
+
+    public void setProcessoId(Long processoId) {
+        this.processoId = processoId;
+    }
+
+    public String getTabelaOrigem() {
+        return tabelaOrigem;
+    }
+
+    public void setTabelaOrigem(String tabelaOrigem) {
+        this.tabelaOrigem = tabelaOrigem;
+    }
+
+    public String getTabelaDestino() {
+        return tabelaDestino;
+    }
+
+    public void setTabelaDestino(String tabelaDestino) {
+        this.tabelaDestino = tabelaDestino;
+    }
+
+    public int getOrdem() {
+        return ordem;
+    }
+
+    public void setOrdem(int ordem) {
+        this.ordem = ordem;
+    }
+
+    public boolean isHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        this.habilitado = habilitado;
+    }
+
+    public String getDsWhere() {
+        return dsWhere;
+    }
+
+    public void setDsWhere(String dsWhere) {
+        this.dsWhere = dsWhere;
+    }
+}
