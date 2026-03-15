@@ -1,7 +1,7 @@
 package database.model;
 
-public class TBReplicaDirecao {
-    private Long id;
+public class TBReplicacaoDirecao {
+    private long id;
     private String direcaoOrigem;
     private String direcaoDestino;
     private String usuarioOrigem;
@@ -9,16 +9,16 @@ public class TBReplicaDirecao {
     private String senhaOrigem;
     private String senhaDestino;
     private boolean habilitado;
-    private Long processoId;
+    private long processoId;
 
-    public TBReplicaDirecao() {
+    public TBReplicacaoDirecao() {
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -78,11 +78,11 @@ public class TBReplicaDirecao {
         this.habilitado = habilitado;
     }
 
-    public Long getProcessoId() {
+    public long getProcessoId() {
         return processoId;
     }
 
-    public void setProcessoId(Long processoId) {
+    public void setProcessoId(long processoId) {
         this.processoId = processoId;
     }
 }

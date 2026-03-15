@@ -2,7 +2,7 @@ package database.model;
 
 public class TBReplicacaoProcesso {
 
-    private Long id;
+    private long id;
     private String processo;
     private String descricao;
     private boolean habilitado;
@@ -14,7 +14,7 @@ public class TBReplicacaoProcesso {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

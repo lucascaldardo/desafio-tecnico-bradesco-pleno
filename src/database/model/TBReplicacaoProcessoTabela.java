@@ -2,8 +2,8 @@ package database.model;
 
 public class TBReplicacaoProcessoTabela {
 
-    private Long id;
-    private Long processoId;
+    private long id;
+    private long processoId;
     private String tabelaOrigem;
     private String tabelaDestino;
     private int ordem;
@@ -13,19 +13,19 @@ public class TBReplicacaoProcessoTabela {
     public TBReplicacaoProcessoTabela() {
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public Long getProcessoId() {
+    public long getProcessoId() {
         return processoId;
     }
 
-    public void setProcessoId(Long processoId) {
+    public void setProcessoId(long processoId) {
         this.processoId = processoId;
     }
 
