@@ -47,7 +47,7 @@ public class TelaReplicacaoProcessoView extends JFrame {
         txfId.setBounds(140,70,420,25);
         getContentPane().add(txfId);
 
-        JLabel lblProcesso = new JLabel("Processo: ");
+        JLabel lblProcesso = new JLabel("PROCESSO: ");
         lblProcesso.setBounds(10,105,120,25);
         getContentPane().add(lblProcesso);
 
@@ -55,7 +55,7 @@ public class TelaReplicacaoProcessoView extends JFrame {
         txfProcesso.setBounds(140,105,420,25);
         getContentPane().add(txfProcesso);
 
-        JLabel lblDescricao = new JLabel("Descrição: ");
+        JLabel lblDescricao = new JLabel("DESCRIÇÃO: ");
         lblDescricao.setBounds(10,140,120,25);
         getContentPane().add(lblDescricao);
 
@@ -63,7 +63,7 @@ public class TelaReplicacaoProcessoView extends JFrame {
         txfDescricao.setBounds(140,140,420,25);
         getContentPane().add(txfDescricao);
 
-        chkHabilitado = new JCheckBox("Habilitado");
+        chkHabilitado = new JCheckBox("HABILITADO");
         chkHabilitado.setBounds(10,175,120,25);
         getContentPane().add(chkHabilitado);
 
