@@ -31,8 +31,8 @@ public class TelaReplicacaoProcessoView extends JFrame {
         this.connection = connection;
         this.dao = new ReplicacaoProcessoDAO(connection);
 
-        setTitle("Cadastro de Processo");
-        setSize(584,300);
+        setTitle("TB_REPLICACAO_PROCESSO");
+        setSize(620,320);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -186,8 +186,30 @@ public class TelaReplicacaoProcessoView extends JFrame {
         });
 
         btnBuscar.addActionListener(b -> {
+                try{
+                    ConsultaProcessoDialog dlg = new ConsultaProcessoDialog(this, dao);
+                    dlg.setVisible(true);
 
-            modoTela = ModoTela.UPDATE;
+                    TBReplicacaoProcesso selecionado = dlg.getSelecionado();
+                    if (selecionado == null) return;
+
+                    modoTela = ModoTela.UPDATE;
+                    txfId.setText(String.valueOf(selecionado.getId()));
+                    txfProcesso.setText(selecionado.getProcesso());
+                    txfDescricao.setText(selecionado.getDescricao());
+                    chkHabilitado.setSelected(selecionado.isHabilitado());
+
+                    txfProcesso.setEnabled(true);
+                    txfDescricao.setEnabled(true);
+                    chkHabilitado.setEnabled(true);
+                    btnSalvar.setEnabled(true);
+                    btnExcluir.setEnabled(true);
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Erro ao excluir registro: " + ex.getMessage());
+                }
+
         });
 
     }
