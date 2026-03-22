@@ -51,7 +51,7 @@ public class ConsultaDirecaoDialog extends JDialog{
         scroll.setBounds(10,10,860,300);
         add(scroll);
 
-        btnSelecionar = new JButton("Selecionar");
+        btnSelecionar = new JButton("SELECIONAR");
         btnSelecionar.setBounds(10,320,140,30);
         add(btnSelecionar);
 
