@@ -17,15 +17,19 @@ public class TelaReplicacaoDirecaoView extends JFrame {
 
     private final Connection connection;
     private final DirecaoDAO dao;
+    private final ReplicacaoProcessoDAO daoProcesso;
 
     private JTextField  txfId;
     private JComboBox<TBReplicacaoProcesso> cbProcesso;
+
     private JTextField txfOrigem;
-    private JTextField txfDestino;
     private JTextField txfUsuarioOrigem;
-    private JTextField txfUsuarioDestino;
     private JTextField txfSenhaOrigem;
+
+    private JTextField txfDestino;
+    private JTextField txfUsuarioDestino;
     private JTextField txfSenhaDestino;
+
     private JCheckBox chkHabilitado;
 
     private JButton btnSalvar;
@@ -37,6 +41,7 @@ public class TelaReplicacaoDirecaoView extends JFrame {
 
         this.connection = connection;
         this.dao = new DirecaoDAO(connection);
+        this.daoProcesso = new ReplicacaoProcessoDAO(connection);
 
         setTitle("Cadastro de Tabelas");
         setSize(760,500);
@@ -360,9 +365,6 @@ public class TelaReplicacaoDirecaoView extends JFrame {
                 txfSenhaDestino.setEnabled(true);
                 btnSalvar.setEnabled(true);
                 btnExcluir.setEnabled(true);
-
-
-
 
             } catch (Exception ex){
                 ex.printStackTrace();
