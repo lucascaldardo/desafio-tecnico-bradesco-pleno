@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class TelaReplicacaoDirecaoView extends JFrame {
 
     private enum ModoTela {NENHUM, INSERT, UPDATE}
-    private TelaReplicacaoDirecaoView.ModoTela modoTela = TelaReplicacaoDirecaoView.ModoTela.NENHUM;
+    private ModoTela modoTela = ModoTela.NENHUM;
 
     private final Connection connection;
     private final DirecaoDAO dao;

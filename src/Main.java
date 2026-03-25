@@ -49,9 +49,12 @@ public class Main extends JFrame {
         itemProcesso.addActionListener(e -> {
             abrirTelaInternaProcesso();
         });
+        menuCadastro.add(itemProcesso);
 
         JMenuItem itemProcessoTabela = new JMenuItem("Processo x Tabelas");
-        itemProcessoTabela.addActionListener(e -> {});
+        itemProcessoTabela.addActionListener(e -> {
+            abrirTelaInternaProcessoTabela();
+        });
         menuCadastro.add(itemProcessoTabela);
 
         JMenuItem itemDirecao = new JMenuItem("Direções");
@@ -74,8 +77,7 @@ public class Main extends JFrame {
             JInternalFrame internalFrame = new JInternalFrame("Processos", true, true, true, true);
             internalFrame.setSize(650, 360);
             internalFrame.setLayout(new BorderLayout());
-            internalFrame.add(tela, BorderLayout.CENTER);
-            internalFrame.setContentPane(tela);
+            internalFrame.add(tela.getContentPane(), BorderLayout.CENTER);
             internalFrame.setVisible(true);
             desktopPane.add(internalFrame);
             internalFrame.setSelected(true);
@@ -93,8 +95,7 @@ public class Main extends JFrame {
             JInternalFrame internalFrame = new JInternalFrame("Cadastro de Direções", true, true, true, true);
             internalFrame.setSize(820, 520);
             internalFrame.setLayout(new BorderLayout());
-            internalFrame.add(tela, BorderLayout.CENTER);
-            internalFrame.setContentPane(tela);
+            internalFrame.add(tela.getContentPane(), BorderLayout.CENTER);
             internalFrame.setVisible(true);
             desktopPane.add(internalFrame);
             internalFrame.setSelected(true);
@@ -112,8 +113,7 @@ public class Main extends JFrame {
             JInternalFrame internalFrame = new JInternalFrame("Cadastro de Processos x Tabela", true, true, true, true);
             internalFrame.setSize(720, 500);
             internalFrame.setLayout(new BorderLayout());
-            internalFrame.add(tela, BorderLayout.CENTER);
-            internalFrame.setContentPane(tela);
+            internalFrame.add(tela.getContentPane(), BorderLayout.CENTER);
             internalFrame.setVisible(true);
             desktopPane.add(internalFrame);
             internalFrame.setSelected(true);

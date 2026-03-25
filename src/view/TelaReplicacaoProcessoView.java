@@ -35,9 +35,10 @@ public class TelaReplicacaoProcessoView extends JFrame {
         setSize(620,320);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        setResizable(false);
-        setLayout(null);
 
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        add(panel);
 
         btnBuscar = new JButton("BUSCAR");
         btnAdicionar = new JButton("ADICIONAR");
@@ -86,6 +87,7 @@ public class TelaReplicacaoProcessoView extends JFrame {
         txfProcesso.setEnabled(false);
         txfDescricao.setEnabled(false);
         chkHabilitado.setEnabled(false);
+
         btnSalvar.setEnabled(false);
         btnExcluir.setEnabled(false);
 
@@ -102,7 +104,7 @@ public class TelaReplicacaoProcessoView extends JFrame {
             txfDescricao.setEnabled(true);
             chkHabilitado.setEnabled(true);
             btnSalvar.setEnabled(true);
-            btnExcluir.setEnabled(true);
+            btnExcluir.setEnabled(false);
             });
 
         btnSalvar.addActionListener(e -> {
@@ -147,7 +149,7 @@ public class TelaReplicacaoProcessoView extends JFrame {
 
             catch (Exception ex){
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(null,  "Erro ao salvar: " +  ex.getMessage());
+                JOptionPane.showMessageDialog(this,  "Erro ao salvar: " +  ex.getMessage());
             }
         });
 

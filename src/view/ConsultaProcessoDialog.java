@@ -44,7 +44,7 @@ public class ConsultaProcessoDialog extends JDialog {
         scrollPane.setBounds(10,10,680,300);
         add(scrollPane);
 
-        btnSelecionar = new JButton("Selecionar");
+        btnSelecionar = new JButton("SELECIONAR");
         btnSelecionar.setBounds(10,320,140,30);
         add(btnSelecionar);
 
@@ -75,7 +75,6 @@ public class ConsultaProcessoDialog extends JDialog {
         });
 
         table.addMouseListener(new java.awt.event.MouseAdapter(){
-            @Override
             public void mouseClicked(MouseEvent e){
                 if (e.getClickCount() ==2){
                     btnSelecionar.doClick();
