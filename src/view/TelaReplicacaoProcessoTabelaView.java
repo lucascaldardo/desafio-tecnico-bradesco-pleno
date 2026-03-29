@@ -172,6 +172,9 @@ public class TelaReplicacaoProcessoTabelaView extends JFrame {
 
             btnSalvar.setEnabled(true);
             btnExcluir.setEnabled(false);
+
+
+
         });
 
         btnSalvar.addActionListener(e -> {

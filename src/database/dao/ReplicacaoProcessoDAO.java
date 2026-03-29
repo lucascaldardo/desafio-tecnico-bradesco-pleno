@@ -67,11 +67,11 @@ public class ReplicacaoProcessoDAO {
     }
 
     public void update(TBReplicacaoProcesso processo) throws SQLException {
-        pstInsert.setString(1, processo.getProcesso());
-        pstInsert.setString(2, processo.getDescricao());
-        pstInsert.setBoolean(3, processo.isHabilitado());
-        pstInsert.setLong(4, processo.getId());
-        pstInsert.executeUpdate();
+        pstUpdate.setString(1, processo.getProcesso());
+        pstUpdate.setString(2, processo.getDescricao());
+        pstUpdate.setBoolean(3, processo.isHabilitado());
+        pstUpdate.setLong(4, processo.getId());
+        pstUpdate.executeUpdate();
     }
 
     public void delete(Long id) throws SQLException {
