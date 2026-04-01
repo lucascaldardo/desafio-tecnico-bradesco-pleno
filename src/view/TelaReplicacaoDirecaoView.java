@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class TelaReplicacaoDirecaoView extends JFrame {
 
@@ -19,22 +20,22 @@ public class TelaReplicacaoDirecaoView extends JFrame {
     private final DirecaoDAO dao;
     private final ReplicacaoProcessoDAO daoProcesso;
 
-    private JTextField  txfId;
+    private JTextField  txtId;
     private JComboBox<TBReplicacaoProcesso> cbProcesso;
 
-    private JTextField txfOrigem;
-    private JTextField txfUsuarioOrigem;
-    private JTextField txfSenhaOrigem;
+    private JTextField txtDirecaoOrigem;
+    private JTextField txtUsuarioOrigem;
+    private JPasswordField txtSenhaOrigem;
 
-    private JTextField txfDestino;
-    private JTextField txfUsuarioDestino;
-    private JTextField txfSenhaDestino;
+    private JTextField txtDirecaoDestino;
+    private JTextField txtUsuarioDestino;
+    private JPasswordField txtSenhaDestino;
 
     private JCheckBox chkHabilitado;
 
-    private JButton btnSalvar;
-    private JButton btnAdicionar;
     private JButton btnBuscar;
+    private JButton btnAdicionar;
+    private JButton btnSalvar;
     private JButton btnExcluir;
 
     public TelaReplicacaoDirecaoView(Connection connection) throws SQLException {
@@ -43,227 +44,222 @@ public class TelaReplicacaoDirecaoView extends JFrame {
         this.dao = new DirecaoDAO(connection);
         this.daoProcesso = new ReplicacaoProcessoDAO(connection);
 
-        setTitle("Cadastro de Tabelas");
-        setSize(760,500);
+        setTitle("TB_REPLICACAO_DIRECAO");
+        setSize(760, 460);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        setResizable(false);
-        setLayout(null);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        add(panel);
 
         btnBuscar = new JButton("BUSCAR");
+        btnBuscar.setBounds(10, 10, 170, 30);
+        panel.add(btnBuscar);
+
         btnAdicionar = new JButton("ADICIONAR");
+        btnAdicionar.setBounds(190, 10, 170, 30);
+        panel.add(btnAdicionar);
+
         btnSalvar = new JButton("SALVAR");
+        btnSalvar.setBounds(370, 10, 170, 30);
+        panel.add(btnSalvar);
+
         btnExcluir = new JButton("EXCLUIR");
+        btnExcluir.setBounds(550, 10, 170, 30);
+        panel.add(btnExcluir);
 
-        btnBuscar.setBounds(10,10,130,30);
-        btnAdicionar.setBounds(150,10,130,30);
-        btnSalvar.setBounds(290,10,130,30);
-        btnExcluir.setBounds(430,10,130,30);
+        JLabel lblId = new JLabel("ID:");
+        lblId.setBounds(10, 70, 140, 25);
+        panel.add(lblId);
 
+        txtId = new JTextField();
+        txtId.setBounds(160, 70, 220, 25);
+        panel.add(txtId);
 
-        getContentPane().add(btnBuscar);
-        getContentPane().add(btnAdicionar);
-        getContentPane().add(btnSalvar);
-        getContentPane().add(btnExcluir);
-
-        JLabel lblId = new JLabel("ID: ");
-        lblId.setBounds(10,70,140,25);
-        getContentPane().add(lblId);
-
-        txfId = new JTextField();
-        txfId.setBounds(160,70,220,25);
-        getContentPane().add(txfId);
-
-        JLabel lblProcesso = new JLabel("PROCESSO: ");
-        lblProcesso.setBounds(10,105,140,25);
-        getContentPane().add(lblProcesso);
+        JLabel lblProcesso = new JLabel("PROCESSO:");
+        lblProcesso.setBounds(10, 105, 140, 25);
+        panel.add(lblProcesso);
 
         cbProcesso = new JComboBox<>();
-        cbProcesso.setBounds(160,105,520,25);
-        getContentPane().add(cbProcesso);
+        cbProcesso.setBounds(160, 105, 320, 25);
+        panel.add(cbProcesso);
 
-        JLabel lblOrigem = new JLabel("ORIGEM: ");
-        lblOrigem.setBounds(10,150,200,25);
-        lblOrigem.setFont(lblOrigem.getFont().deriveFont(Font.BOLD));
-        getContentPane().add(lblOrigem);
+        JLabel lblHabilitado = new JLabel("HABILITADO:");
+        lblHabilitado.setBounds(500, 105, 120, 25);
+        panel.add(lblHabilitado);
 
-        JLabel lblDirecaoOrigem = new JLabel("DIRECAO ORIGEM: ");
-        lblDirecaoOrigem.setBounds(10,185,140,25);
-        getContentPane().add(lblDirecaoOrigem);
+        chkHabilitado = new JCheckBox("Sim");
+        chkHabilitado.setBounds(620, 105, 80, 25);
+        panel.add(chkHabilitado);
 
-        txfOrigem = new JTextField();
-        txfOrigem.setBounds(160,185,560,25);
-        getContentPane().add(txfOrigem);
+        JLabel lblOrigemTitulo = new JLabel("ORIGEM");
+        lblOrigemTitulo.setBounds(10, 150, 200, 25);
+        lblOrigemTitulo.setFont(lblOrigemTitulo.getFont().deriveFont(java.awt.Font.BOLD));
+        panel.add(lblOrigemTitulo);
 
-        JLabel lblUsuarioOrigem = new JLabel("USUARIO ORIGEM: ");
-        lblUsuarioOrigem.setBounds(10,220,140,25);
-        getContentPane().add(lblUsuarioOrigem);
+        JLabel lblDirecaoOrigem = new JLabel("DIRECAO_ORIGEM:");
+        lblDirecaoOrigem.setBounds(10, 185, 140, 25);
+        panel.add(lblDirecaoOrigem);
 
-        txfUsuarioOrigem = new JTextField();
-        txfUsuarioOrigem.setBounds(160,220,560,25);
-        getContentPane().add(txfUsuarioOrigem);
+        txtDirecaoOrigem = new JTextField();
+        txtDirecaoOrigem.setBounds(160, 185, 560, 25);
+        panel.add(txtDirecaoOrigem);
 
-        JLabel lblSenhaOrigem = new JLabel("SENHA ORIGEM: ");
-        lblSenhaOrigem.setBounds(10,255,140,25);
-        getContentPane().add(lblSenhaOrigem);
+        JLabel lblUsuarioOrigem = new JLabel("USUARIO_ORIGEM:");
+        lblUsuarioOrigem.setBounds(10, 220, 140, 25);
+        panel.add(lblUsuarioOrigem);
 
-        txfSenhaOrigem = new JTextField();
-        txfSenhaOrigem.setBounds(160,255,560,25);
-        getContentPane().add(txfSenhaOrigem);
+        txtUsuarioOrigem = new JTextField();
+        txtUsuarioOrigem.setBounds(160, 220, 560, 25);
+        panel.add(txtUsuarioOrigem);
 
-        JLabel lblDestino = new JLabel("DESTINO: ");
-        lblDestino.setBounds(10,300,200,25);
-        lblDestino.setFont(lblDestino.getFont().deriveFont(Font.BOLD));
-        getContentPane().add(lblDestino);
+        JLabel lblSenhaOrigem = new JLabel("SENHA_ORIGEM:");
+        lblSenhaOrigem.setBounds(10, 255, 140, 25);
+        panel.add(lblSenhaOrigem);
 
-        JLabel lblDirecaoDestino = new JLabel("DIRECAO DESTINO: ");
-        lblDirecaoDestino.setBounds(10,335,140,25);
-        getContentPane().add(lblDirecaoDestino);
+        txtSenhaOrigem = new JPasswordField();
+        txtSenhaOrigem.setBounds(160, 255, 560, 25);
+        panel.add(txtSenhaOrigem);
 
-        txfDestino = new JTextField();
-        txfDestino.setBounds(160,335,560,25);
-        getContentPane().add(txfDestino);
+        JLabel lblDestinoTitulo = new JLabel("DESTINO");
+        lblDestinoTitulo.setBounds(10, 300, 200, 25);
+        lblDestinoTitulo.setFont(lblDestinoTitulo.getFont().deriveFont(java.awt.Font.BOLD));
+        panel.add(lblDestinoTitulo);
 
-        JLabel lblUsuarioDestino = new JLabel("USUARIO DESTINO: ");
-        lblUsuarioDestino.setBounds(10,370,140,25);
-        getContentPane().add(lblUsuarioDestino);
+        JLabel lblDirecaoDestino = new JLabel("DIRECAO_DESTINO:");
+        lblDirecaoDestino.setBounds(10, 335, 140, 25);
+        panel.add(lblDirecaoDestino);
 
-        txfUsuarioDestino = new JTextField();
-        txfUsuarioDestino.setBounds(160,370,280,25);
-        getContentPane().add(txfUsuarioDestino);
+        txtDirecaoDestino = new JTextField();
+        txtDirecaoDestino.setBounds(160, 335, 560, 25);
+        panel.add(txtDirecaoDestino);
 
-        JLabel lblSenhaDestino = new JLabel("SENHA DESTINO: ");
-        lblSenhaDestino.setBounds(450,370,120,25);
-        getContentPane().add(lblSenhaDestino);
+        JLabel lblUsuarioDestino = new JLabel("USUARIO_DESTINO:");
+        lblUsuarioDestino.setBounds(10, 370, 140, 25);
+        panel.add(lblUsuarioDestino);
 
-        txfUsuarioDestino = new JTextField();
-        txfUsuarioDestino.setBounds(570,370,150,25);
-        getContentPane().add(txfUsuarioDestino);
+        txtUsuarioDestino = new JTextField();
+        txtUsuarioDestino.setBounds(160, 370, 280, 25);
+        panel.add(txtUsuarioDestino);
 
+        JLabel lblSenhaDestino = new JLabel("SENHA_DESTINO:");
+        lblSenhaDestino.setBounds(450, 370, 120, 25);
+        panel.add(lblSenhaDestino);
 
-        chkHabilitado = new JCheckBox("HABILITADO");
-        chkHabilitado.setBounds(10,405,140,25);
-        getContentPane().add(chkHabilitado);
+        txtSenhaDestino = new JPasswordField();
+        txtSenhaDestino.setBounds(570, 370, 150, 25);
+        panel.add(txtSenhaDestino);
 
-        txfId.setEnabled(false);
+        cbProcesso.removeAllItems();
+        ArrayList<TBReplicacaoProcesso> processos = daoProcesso.selectAll();
+        for (TBReplicacaoProcesso p : processos) {
+            cbProcesso.addItem(p);
+        }
+
+        txtId.setEnabled(false);
         cbProcesso.setEnabled(false);
         chkHabilitado.setEnabled(false);
-        txfOrigem.setEnabled(false);
-        txfUsuarioOrigem.setEnabled(false);
-        txfDestino.setEnabled(false);
-        txfUsuarioDestino.setEnabled(false);
-        txfSenhaDestino.setEnabled(false);
+
+        txtDirecaoOrigem.setEnabled(false);
+        txtUsuarioOrigem.setEnabled(false);
+        txtSenhaOrigem.setEnabled(false);
+
+        txtDirecaoDestino.setEnabled(false);
+        txtUsuarioDestino.setEnabled(false);
+        txtSenhaDestino.setEnabled(false);
+
         btnSalvar.setEnabled(false);
         btnExcluir.setEnabled(false);
 
         btnAdicionar.addActionListener(e -> {
-
             modoTela = ModoTela.INSERT;
 
-            txfId.setText("");
+            txtId.setText("");
+            if (cbProcesso.getItemCount() > 0) cbProcesso.setSelectedIndex(0);
 
-            if (cbProcesso.getItemCount() > 0){
-                cbProcesso.setSelectedIndex(0);
-            }
             chkHabilitado.setSelected(true);
 
-            txfOrigem.setText("");
-            txfUsuarioOrigem.setText("");
-            txfSenhaOrigem.setText("");
+            txtDirecaoOrigem.setText("");
+            txtUsuarioOrigem.setText("");
+            txtSenhaOrigem.setText("");
 
-            txfDestino.setText("");
-            txfUsuarioDestino.setText("");
-            txfSenhaDestino.setText("");
+            txtDirecaoDestino.setText("");
+            txtUsuarioDestino.setText("");
+            txtSenhaDestino.setText("");
 
             cbProcesso.setEnabled(true);
             chkHabilitado.setEnabled(true);
-            txfOrigem.setEnabled(true);
-            txfUsuarioOrigem.setEnabled(true);
-            txfSenhaOrigem.setEnabled(true);
 
-            txfDestino.setEnabled(true);
-            txfUsuarioDestino.setEnabled(true);
-            txfSenhaDestino.setEnabled(true);
+            txtDirecaoOrigem.setEnabled(true);
+            txtUsuarioOrigem.setEnabled(true);
+            txtSenhaOrigem.setEnabled(true);
+
+            txtDirecaoDestino.setEnabled(true);
+            txtUsuarioDestino.setEnabled(true);
+            txtSenhaDestino.setEnabled(true);
 
             btnSalvar.setEnabled(true);
-            btnExcluir.setEnabled(true);
-
+            btnExcluir.setEnabled(false);
         });
 
         btnSalvar.addActionListener(e -> {
             try {
-                if (cbProcesso.getSelectedIndex() == -1){
-                    JOptionPane.showMessageDialog(this, "Informe o PROCESSO.");
+                if (cbProcesso.getSelectedItem() == null) {
+                    JOptionPane.showMessageDialog(this, "Selecione um PROCESSO.");
                     return;
                 }
-            if (txfOrigem.getText().trim().isEmpty()){
-                JOptionPane.showMessageDialog(this, "Informe a ORIGEM");
-                return;
-            }
-
-            if (txfDestino.getText().trim().isEmpty()){
-                JOptionPane.showMessageDialog(this, "Informe a DESTINO");
-                return;
-            }
-
-            if (txfSenhaOrigem.getText().trim().isEmpty()){
-                JOptionPane.showMessageDialog(this, "Informe a SENHA DE ORIGEM");
-                return;
-            }
-
-            if (txfSenhaDestino.getText().trim().isEmpty()){
-                JOptionPane.showMessageDialog(this, "Informe a SENHA DE DESTINO");
-                return;
-            }
-
-            if (txfUsuarioOrigem.getText().trim().isEmpty()){
-                JOptionPane.showMessageDialog(this, "Informe o USUARIO DE ORIGEM");
-                return;
-            }
-
-            if (txfUsuarioDestino.getText().trim().isEmpty()){
-                JOptionPane.showMessageDialog(this, "Informe o USUARIO DE DESTINO");
-                return;
-            }
+                if (txtDirecaoOrigem.getText().trim().isEmpty() || txtDirecaoDestino.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Informe DIRECAO_ORIGEM e DIRECAO_DESTINO.");
+                    return;
+                }
 
             TBReplicacaoProcesso pSel = (TBReplicacaoProcesso) cbProcesso.getSelectedItem();
+
+             // poderia alterar da 221 até 229
 
             TBReplicacaoDirecao d = new TBReplicacaoDirecao();
             d.setProcessoId(pSel.getId());
             d.setHabilitado(chkHabilitado.isSelected());
-            d.setDirecaoOrigem(txfOrigem.getText().trim());
-            d.setUsuarioOrigem(txfOrigem.getText().trim());
-            d.setSenhaOrigem(txfOrigem.getText().trim());
-            d.setDirecaoDestino(txfOrigem.getText().trim());
-            d.setUsuarioDestino(txfOrigem.getText().trim());
-            d.setSenhaDestino(txfOrigem.getText().trim());
 
-            if (modoTela == ModoTela.INSERT){
-                dao.insert(d);
-                JOptionPane.showMessageDialog(this, "Direção cadastrada");
-            } else if (modoTela == ModoTela.UPDATE) {
-                if (txfId.getText().trim().isEmpty()){
-                    JOptionPane.showMessageDialog(this, "ID não encontrado");
+            d.setDirecaoOrigem(txtDirecaoOrigem.getText().trim());
+            d.setUsuarioOrigem(txtUsuarioOrigem.getText().trim());
+            d.setSenhaOrigem(new String(txtSenhaOrigem.getPassword()));
+
+            d.setDirecaoDestino(txtDirecaoDestino.getText().trim());
+            d.setUsuarioDestino(txtUsuarioDestino.getText().trim());
+            d.setSenhaDestino(new String(txtSenhaDestino.getPassword()));
+
+                if (modoTela == ModoTela.INSERT) {
+                    dao.insert(d);
+                    JOptionPane.showMessageDialog(this, "Inserido com sucesso.");
+                } else if (modoTela == ModoTela.UPDATE) {
+                    if (txtId.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "ID não carregado para update.");
+                        return;
+                    }
+                    d.setId(Long.parseLong(txtId.getText().trim()));
+                    dao.update(d);
+                    JOptionPane.showMessageDialog(this, "Atualizado com sucesso.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Clique em ADICIONAR ou BUSCAR antes de salvar.");
                     return;
                 }
-                d.setId(Integer.parseInt(txfId.getText()));
-                dao.update(d);
-                JOptionPane.showMessageDialog(this,"Direção atualizada");
-            }else {
-                JOptionPane.showMessageDialog(this, "Clique em ADICIONAR ou Buscar antes de salvar");
-            }
 
             modoTela = ModoTela.NENHUM;
-            txfId.setEnabled(false);
+
             cbProcesso.setEnabled(false);
             chkHabilitado.setEnabled(false);
-            txfOrigem.setEnabled(false);
-            txfUsuarioOrigem.setEnabled(false);
-            txfDestino.setEnabled(false);
-            txfUsuarioDestino.setEnabled(false);
-            txfSenhaDestino.setEnabled(false);
+
+            txtDirecaoOrigem.setEnabled(false);
+            txtUsuarioOrigem.setEnabled(false);
+            txtSenhaOrigem.setEnabled(false);
+
+            txtDirecaoDestino.setEnabled(false);
+            txtUsuarioDestino.setEnabled(false);
+            txtSenhaDestino.setEnabled(false);
+
             btnSalvar.setEnabled(false);
-            btnExcluir.setEnabled(false);
 
             }
             catch (Exception ex){
@@ -274,82 +270,80 @@ public class TelaReplicacaoDirecaoView extends JFrame {
 
         btnExcluir.addActionListener(e -> {
             try {
-                if (txfId.getText().trim().isEmpty()){
+                if (txtId.getText().trim().isEmpty()){
                     JOptionPane.showMessageDialog(this, "ID não encontrado para exclusão");
                     return;
                 }
 
-                int op = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir o registro? ", "Excluir", JOptionPane.YES_NO_OPTION);
+                int op = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir o registro? ", "Excluir",
+                        JOptionPane.YES_NO_OPTION);
+
                 if (op != JOptionPane.YES_OPTION) return;
 
-                long id = Long.parseLong(txfId.getText());
+                long id = Long.parseLong(txtId.getText());
                 dao.delete(id);
-                JOptionPane.showMessageDialog(this, "Direção excluida");
+
+                JOptionPane.showMessageDialog(this, "Excluida com sucesso");
 
                 modoTela = ModoTela.NENHUM;
 
-                txfId.setText("");
-
-                if (cbProcesso.getItemCount() > 0){
-                    cbProcesso.setSelectedIndex(0);
-                }
+                txtId.setText("");
+                if (cbProcesso.getItemCount() > 0) cbProcesso.setSelectedIndex(0);
                 chkHabilitado.setSelected(false);
 
-                txfOrigem.setText("");
-                txfUsuarioOrigem.setText("");
-                txfSenhaOrigem.setText("");
+                txtDirecaoOrigem.setText("");
+                txtUsuarioOrigem.setText("");
+                txtSenhaOrigem.setText("");
 
-                txfDestino.setText("");
-                txfUsuarioDestino.setText("");
-                txfSenhaDestino.setText("");
+                txtDirecaoDestino.setText("");
+                txtUsuarioDestino.setText("");
+                txtSenhaDestino.setText("");
 
                 cbProcesso.setEnabled(false);
                 chkHabilitado.setEnabled(false);
-                txfOrigem.setEnabled(false);
-                txfUsuarioOrigem.setEnabled(false);
-                txfSenhaOrigem.setEnabled(false);
 
-                txfDestino.setEnabled(false);
-                txfUsuarioDestino.setEnabled(false);
-                txfSenhaDestino.setEnabled(false);
+                txtDirecaoOrigem.setEnabled(false);
+                txtUsuarioOrigem.setEnabled(false);
+                txtSenhaOrigem.setEnabled(false);
+
+                txtDirecaoDestino.setEnabled(false);
+                txtUsuarioDestino.setEnabled(false);
+                txtSenhaDestino.setEnabled(false);
 
                 btnSalvar.setEnabled(false);
                 btnExcluir.setEnabled(false);
             }
             catch (Exception ex){
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex.getMessage());
+                JOptionPane.showMessageDialog(this, "Erro ao excluir: " + ex.getMessage());
             }
-
         });
 
         btnBuscar.addActionListener(e -> {
             try {
-
                 ConsultaDirecaoDialog dlg = new ConsultaDirecaoDialog(this, dao);
                 dlg.setVisible(true);
 
                 TBReplicacaoDirecao sel = dlg.getSelecionado();
-
                 if (sel == null) return;
 
                 modoTela = ModoTela.UPDATE;
 
-                txfId.setText(String.valueOf(sel.getId()));
+                txtId.setText(String.valueOf(sel.getId()));
                 chkHabilitado.setSelected(sel.isHabilitado());
 
-                txfOrigem.setText(sel.getDirecaoOrigem());
-                txfUsuarioOrigem.setText(sel.getUsuarioOrigem());
-                txfSenhaOrigem.setText(sel.getSenhaOrigem());
+                txtDirecaoOrigem.setText(sel.getDirecaoOrigem());
+                txtUsuarioOrigem.setText(sel.getUsuarioOrigem());
+                txtSenhaOrigem.setText(sel.getSenhaOrigem());
 
-                txfDestino.setText(sel.getDirecaoDestino());
-                txfUsuarioDestino.setText(sel.getUsuarioDestino());
-                txfSenhaDestino.setText(sel.getSenhaDestino());
+                txtDirecaoDestino.setText(sel.getDirecaoDestino());
+                txtUsuarioDestino.setText(sel.getUsuarioDestino());
+                txtSenhaDestino.setText(sel.getSenhaDestino());
 
-                long id = sel.getProcessoId();
+                long pid = sel.getProcessoId();
                 for (int i = 0; i <cbProcesso.getItemCount(); i++){
                     TBReplicacaoProcesso item = cbProcesso.getItemAt(i);
-                    if (item.getId() == id){
+                    if (item != null && item.getId() == pid) {
                         cbProcesso.setSelectedIndex(i);
                         break;
                     }
@@ -357,18 +351,18 @@ public class TelaReplicacaoDirecaoView extends JFrame {
 
                 cbProcesso.setEnabled(true);
                 chkHabilitado.setEnabled(true);
-                txfOrigem.setEnabled(true);
-                txfUsuarioOrigem.setEnabled(true);
-                txfSenhaOrigem.setEnabled(true);
-                txfDestino.setEnabled(true);
-                txfUsuarioDestino.setEnabled(true);
-                txfSenhaDestino.setEnabled(true);
+                txtDirecaoOrigem.setEnabled(true);
+                txtUsuarioOrigem.setEnabled(true);
+                txtSenhaOrigem.setEnabled(true);
+                txtDirecaoDestino.setEnabled(true);
+                txtUsuarioDestino.setEnabled(true);
+                txtSenhaDestino.setEnabled(true);
                 btnSalvar.setEnabled(true);
                 btnExcluir.setEnabled(true);
 
             } catch (Exception ex){
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(null, "ID não encontrado" + ex.getMessage());
+                JOptionPane.showMessageDialog(this, "ID não encontrado" + ex.getMessage());
             }
 
         });

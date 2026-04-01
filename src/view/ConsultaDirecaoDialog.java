@@ -36,13 +36,13 @@ public class ConsultaDirecaoDialog extends JDialog{
         model.addColumn("HABILITADO");
 
         ArrayList<TBReplicacaoDirecao> lista = dao.selectAll();
-        for (TBReplicacaoDirecao p : lista){
+        for (TBReplicacaoDirecao d : lista){
             model.addRow(new Object[]{
-                    p.getId(),
-                    p.getProcessoId(),
-                    p.getDirecaoOrigem(),
-                    p.getDirecaoDestino(),
-                    p.isHabilitado()
+                    d.getId(),
+                    d.getProcessoId(),
+                    d.getDirecaoOrigem(),
+                    d.getDirecaoDestino(),
+                    d.isHabilitado()
             });
         }
 
@@ -56,7 +56,7 @@ public class ConsultaDirecaoDialog extends JDialog{
         add(btnSelecionar);
 
         btnCancelar = new JButton("CANCELAR");
-        btnCancelar.setBounds(170,320,150,30);
+        btnCancelar.setBounds(160,320,140,30);
         add(btnCancelar);
 
         btnCancelar.addActionListener(e -> {
@@ -67,7 +67,7 @@ public class ConsultaDirecaoDialog extends JDialog{
         btnSelecionar.addActionListener(e -> {
             int row =  table.getSelectedRow();
             if (row == -1) {
-                JOptionPane.showMessageDialog(this, "Selecione uma direção.");
+                JOptionPane.showMessageDialog(this, "Selecione uma linha.");
                 return;
             }
 
@@ -79,12 +79,12 @@ public class ConsultaDirecaoDialog extends JDialog{
                 throw new RuntimeException(ex);
             }
 
-
             selecionado = d;
             dispose();
         });
 
         table.addMouseListener(new java.awt.event.MouseAdapter(){
+            @Override
             public void mouseClicked(MouseEvent evt) {
                 if (evt.getClickCount() == 2) {
                     btnSelecionar.doClick();

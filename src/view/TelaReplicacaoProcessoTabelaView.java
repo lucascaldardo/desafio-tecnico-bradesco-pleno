@@ -3,7 +3,6 @@ package view;
 import database.dao.ProcessoTabelaDAO;
 import database.dao.ReplicacaoProcessoDAO;
 import database.model.TBReplicacaoProcesso;
-import database.model.TBReplicacaoProcesso;
 import database.model.TBReplicacaoProcessoTabela;
 
 import javax.swing.*;
@@ -172,9 +171,6 @@ public class TelaReplicacaoProcessoTabelaView extends JFrame {
 
             btnSalvar.setEnabled(true);
             btnExcluir.setEnabled(false);
-
-
-
         });
 
         btnSalvar.addActionListener(e -> {

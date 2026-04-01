@@ -27,7 +27,9 @@ public class Main extends JFrame {
         JMenu meunuSistema = new JMenu("Sistema");
 
         JMenuItem itemExecutar = new JMenuItem("Executar Replicação");
-        itemExecutar.addActionListener(e -> {});
+        itemExecutar.addActionListener(e -> {
+            
+        });
         meunuSistema.add(itemExecutar);
 
         JMenuItem itemSair = new JMenuItem("Sair");

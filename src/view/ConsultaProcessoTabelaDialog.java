@@ -84,9 +84,9 @@ public class ConsultaProcessoTabelaDialog extends JDialog{
             dispose();
         });
 
-        table.addMouseListener(new java.awt.event.MouseAdapter(){
-            public void mouseClicked(MouseEvent e){
-                if (e.getClickCount() ==2){
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
                     btnSelecionar.doClick();
                 }
             }
