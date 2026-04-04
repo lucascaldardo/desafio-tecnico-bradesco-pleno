@@ -47,7 +47,7 @@ public class DirecaoDAO {
         this.pstDelete = connection.prepareStatement(SQL_DELETE);
     }
 
-    private ArrayList<TBReplicacaoDirecao> selectByProcessoHabilitado(long processoId) throws SQLException {
+    public ArrayList<TBReplicacaoDirecao> selectByProcessoHabilitado(long processoId) throws SQLException {
         ArrayList<TBReplicacaoDirecao> lista = new ArrayList<>();
         pstSelectByProcessoHabilitado.setLong(1, processoId);
         try(ResultSet rs = pstSelectByProcessoHabilitado.executeQuery()){
