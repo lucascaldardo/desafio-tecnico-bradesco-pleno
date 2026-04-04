@@ -22,7 +22,7 @@ public class ReplicacaoProcessoDAO {
             "INSERT INTO TB_REPLICACAO_PROCESSO (PROCESSO, DESCRICAO, HABILITADO) VALUES (?, ?, ?)";
 
     private static final String SQL_UPDATE =
-            "UPDATE TB_REPLICACAO_PROCESSO SET PROCESSO = ? ,DESCRICAO = ? ,HABILITADO = ? ,WHERE ID = ?";
+            "UPDATE TB_REPLICACAO_PROCESSO SET PROCESSO = ? ,DESCRICAO = ? ,HABILITADO = ? WHERE ID = ?";
 
     private static final String SQL_DELETE =
             "DELETE FROM TB_REPLICACAO_PROCESSO WHERE ID = ?";
