@@ -16,8 +16,8 @@ public class OrigemDao {
     }
 
     public ResultSet selectComandoOrigem(final String tabela, String where) throws SQLException {
-        pstSelect = connection.prepareStatement("SELECT * FROM " + tabela + "WHERE " + where);
-        System.out.println("Select na origem: " + "SELECT * FROM " + tabela + "WHERE " + where);
+        pstSelect = connection.prepareStatement("SELECT * FROM " + tabela + " WHERE " + where);
+        System.out.println("Select na origem: " + "SELECT * FROM " + tabela + " WHERE " + where);
         return pstSelect.executeQuery();
 
     }

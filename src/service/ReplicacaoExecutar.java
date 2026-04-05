@@ -63,6 +63,27 @@ public class ReplicacaoExecutar {
                                         ResultSet resultado = daoOrigem.selectComandoOrigem(t.getTabelaOrigem(),t.getDsWhere());
                                         if (resultado != null){
                                             ResultSetMetaData metaData = resultado.getMetaData();
+                                            int lnColumns = metaData.getColumnCount();
+                                            String insertSql = insertGet(t.getTabelaDestino(), metaData);
+
+                                            connDestino.setAutoCommit(false);
+                                            try (PreparedStatement pstInsert = connDestino.prepareStatement(insertSql)){
+                                                while (resultado.next()){
+                                                 for (int i = 1; i <= lnColumns; i++){
+                                                     pstInsert.setObject(i, resultado.getObject(i));
+                                                    }
+                                                    pstInsert.addBatch();
+                                                }
+                                                pstInsert.executeBatch();
+                                                System.out.println("Dados replicados com sucesso");
+                                                connDestino.commit();
+                                            }catch (Exception e){
+                                                System.out.println("DEU PRIMARY KEY. IGNORANDO");
+                                            }
+                                        finally {
+                                                connDestino.setAutoCommit(true);
+                                                resultado.close();
+                                            }
                                         }
                                     }
                                     else {
@@ -88,7 +109,15 @@ public class ReplicacaoExecutar {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
+
+    private String insertGet(String tabelaDestino, ResultSetMetaData metaData) throws SQLException {
+
+        String lsColumn = "", lsValue = "";
+
+        for (int ln1 = 0; ln1 <metaData.getColumnCount(); lsColumn += metaData.getColumnName(++ln1)+ ","+ "\n", lsValue += "? ,"+"\n");
+
+        return "insert into " + tabelaDestino + " (" + lsColumn.substring(0, lsColumn.length() - 2) + ") values (" + lsValue.substring(0, lsValue.length() - 2) + ")";
+    }
+
 }

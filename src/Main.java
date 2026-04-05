@@ -1,4 +1,5 @@
 import database.model.TBReplicacaoProcesso;
+import service.ReplicacaoExecutar;
 import view.TelaReplicacaoDirecaoView;
 import view.TelaReplicacaoProcessoTabelaView;
 import view.TelaReplicacaoProcessoView;
@@ -28,7 +29,21 @@ public class Main extends JFrame {
 
         JMenuItem itemExecutar = new JMenuItem("Executar Replicação");
         itemExecutar.addActionListener(e -> {
-            
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                   while (!Thread.currentThread().isInterrupted()){
+                        new ReplicacaoExecutar(connection);
+                       try {
+                           Thread.sleep(6000);
+                       } catch (InterruptedException ex) {
+                           throw new RuntimeException(ex);
+                       }
+                   }
+                }
+            }).start();
+
         });
         meunuSistema.add(itemExecutar);
 
