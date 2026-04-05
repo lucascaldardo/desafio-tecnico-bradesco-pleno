@@ -143,6 +143,30 @@ public class Main extends JFrame {
 
     public static void main(String[] args) {
 
+        if (args != null && args.length > 0){
+            if (args[0].equalsIgnoreCase("service=yes")){
+                try{
+                    connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/controle","postgres", "123");
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            while (!Thread.currentThread().isInterrupted()){
+                                new ReplicacaoExecutar(connection);
+                                try {
+                                    Thread.sleep(60000);
+                                } catch (InterruptedException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            }
+                        }
+                    }).start();
+                    SwingUtilities.invokeLater(() -> new Main().setVisible(true));
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
         try {
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/controle","postgres", "123");
             SwingUtilities.invokeLater(() -> new Main().setVisible(true));
@@ -152,6 +176,6 @@ public class Main extends JFrame {
             JOptionPane.showMessageDialog(null, "Não foi possível conectar com o banco de dados");
             System.exit(0);
         }
-
     }
+
 }
